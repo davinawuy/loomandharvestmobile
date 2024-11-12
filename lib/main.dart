@@ -1,4 +1,4 @@
-import 'package:loom_and_harvest/menu.dart';
+import 'package:loom_and_harvest/screens/menu.dart';
 import 'package:flutter/material.dart';
 
 
@@ -30,7 +30,16 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple,).copyWith(secondary: Colors.deepPurple[400]),
+      colorScheme: ColorScheme.fromSwatch(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.grey,
+      ).copyWith(
+        primary: Color(0xFF212121),       // Dark gray for primary
+        secondary: Color(0xFFBB86FC),     // Accent purple for secondary
+        surface: Color(0xFF121212),    // Very dark gray for background
+        onPrimary: Color(0xFFFFFFFF),     // White text on primary color
+        onSecondary: Color(0xFF000000),   // Black text on secondary color
+        onSurface: Color(0xFFFFFFFF)),
         useMaterial3: true,
       ),
       home: MyHomePage(),
