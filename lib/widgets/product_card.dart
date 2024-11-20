@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:loom_and_harvest/screens/product_form.dart';
+import 'package:loom_and_harvest/screens/list_Product.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:loom_and_harvest/screens/login.dart';
 
 class ItemHomepage {
   final String name;
@@ -16,27 +20,53 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Material(
       color: item.color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
-        onTap: () {
-          String message = "You pressed the ${item.name} button!";
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text(message)),
-            );
-
+        onTap: () async {
           if (item.name == "Add Product") {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProductForm()),
+              MaterialPageRoute(builder: (context) => const ProductFormPage()),
             );
           } else if (item.name == "View Product List") {
-            // TODO: Implement navigation to Product List page
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProductPage()),
+            );
           } else if (item.name == "Logout") {
-            // TODO: Implement logout functionality
+            final response = await request.logout(
+              "http://127.0.0.1:8000/auth/logout/",
+            );
+            String message = response["message"];
+            if (context.mounted) {
+              if (response['status']) {
+                String uname = response["username"];
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$message Goodbye, $uname."),
+                ));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(message),
+                  ),
+                );
+              }
+            }
+          } else {
+            // Fallback message for unimplemented actions
+            String message = "You pressed the ${item.name} button!";
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(content: Text(message)),
+              );
           }
         },
         child: Container(

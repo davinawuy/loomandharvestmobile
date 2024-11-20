@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loom_and_harvest/screens/menu.dart';
 import 'package:loom_and_harvest/screens/product_form.dart';
-
+import 'package:loom_and_harvest/screens/list_Product.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -13,7 +13,7 @@ class LeftDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary, // Set the header background color to green
+              color: Theme.of(context).colorScheme.primary,
             ),
             child: const Column(
               children: [
@@ -42,7 +42,6 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.home_outlined, color: Colors.white),
             title: const Text('Home Page'),
-            // Redirection part to MyHomePage
             onTap: () {
               Navigator.pushReplacement(
                 context,
@@ -53,12 +52,22 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.local_offer, color: Colors.white), // Clothing-themed icon
+            leading: const Icon(Icons.local_offer, color: Colors.white),
             title: const Text('Add Product'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProductForm()),
+                MaterialPageRoute(builder: (context) => const ProductFormPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.list, color: Colors.white),
+            title: const Text('View Products'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProductPage()),
               );
             },
           ),
