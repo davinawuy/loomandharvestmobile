@@ -145,7 +145,7 @@ The user will put their login details into the flutter app and it will make a po
 
 I began by first modfying my django project. I created the authenthication app so that I can make the needed authentication views method to allow the flutter app to grant session tokens and create valid django users. For this I assumed the Flutter app would be making HTTP requests such as POST to allow this to work. In turn I will be sending success messages accordingly and the needed tokens.
 
-Once that side was finished I created the needed adding function in the views.py of the main app. To ensure it worked i based it off the model from my django app and I created the following code.
+Once that side was finished I created the needed adding function in the views.py of the main app. To ensure it worked I based it off the model from my django app and I created in the following code.
 
 ```dart
 @csrf_exempt
@@ -284,4 +284,4 @@ class Fields {
 
 ```
 
-Once the model was complete it was a matter of just creating the add product page to send a post request when the data is all valid. I connected it to the Django app and it works as expected. The list poduct also worked the same I got the JSON data and the I just displayed all the data as cards. For these two sections I followed the tutorial but adapted it to fit my code. I then made the products detail page which shows all the product details. For this part of the task I made a very simple product page and it worked as intended. To ensure the data is shown I used the JSON data and to return back to the original page I used navigator pop.
+Once the model was complete it was a matter of just creating the add product page to send a post request when the data is all valid. I connected it to the Django app and it works as expected. The list poduct also worked the same I got the JSON data and the I just displayed all the data as cards. For these two sections I followed the tutorial but adapted it to fit my code. I then made the products detail page which shows all the product details. For this part of the task I made a very simple product page and it worked as intended. To ensure the data is shown I used the JSON data and to return back to the original page I used navigator pop. After this was all done I did a test to make sure it all worked and submitted the task.
